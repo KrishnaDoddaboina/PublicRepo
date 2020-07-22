@@ -1,7 +1,7 @@
 <apex:page>
 <!-- Begin Default Content REMOVE THIS -->
 <h1>Congratulations</h1>
-This is your new Page.........
+This is your new Page for Vs Code.........
 <!-- End Default Content REMOVE THIS -->
 <button type="button" onclick="alert('Hello World!')">Click Me!</button>
 </apex:page>

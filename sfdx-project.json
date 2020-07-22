@@ -6,12 +6,21 @@
             "package": "PraticePackage3",
             "versionName": "ver 0.1",
             "versionNumber": "0.1.0.NEXT"
+        },
+        {
+            "path": "force-app",
+            "package": "PraticePackage6",
+            "versionName": "ver 0.1",
+            "versionNumber": "0.1.0.NEXT",
+            "default": false
         }
     ],
     "namespace": "",
     "sfdcLoginUrl": "https://login.salesforce.com",
     "sourceApiVersion": "48.0",
     "packageAliases": {
-        "PraticePackage3": "0Ho2w000000KyykCAC"
+        "PraticePackage3": "0Ho2w000000KyykCAC",
+        "PraticePackage6": "0Ho2w000000KyypCAC",
+        "PraticePackage3@0.1.0-1": "04t2w0000069DRqAAM"
     }
 }
