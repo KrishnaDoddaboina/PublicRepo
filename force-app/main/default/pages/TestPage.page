@@ -2,7 +2,8 @@
 <!-- Begin Default Content REMOVE THIS -->
 <h1>Congratulations</h1>
 This is your new Page for Vs Code .........Hello World
-Congratulations...Hello World, welcome to Salesforce, 
+Congratulations...Hello World, welcome to Salesforce, sfdx
+Welcome to Salesforce Dx
 <!-- End Default Content REMOVE THIS -->
 <button type="button" onclick="alert('Hello World!')">Click Me!</button>
 </apex:page>
