@@ -4,7 +4,7 @@
 This is your new Page for Vs Code .........Hello World
 Congratulations...Hello World, welcome to Salesforce, sfdx
 Welcome to Salesforce Dx
-Welcome to Jenkins
+Welcome to Jenkins integration
 <!-- End Default Content REMOVE THIS -->
 <button type="button" onclick="alert('Hello World!')">Click Me!</button>
 </apex:page>
