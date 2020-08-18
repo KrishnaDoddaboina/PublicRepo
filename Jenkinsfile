@@ -70,7 +70,7 @@ node {
             // -------------------------------------------------------------------------
 
             stage('Display Test Scratch Org') {
-                rc = command "${toolbelt}/sfdx force:org:display --targetusername ciorg"
+                rc = command "${toolbelt}/sfdx force:org:display --targetusername HubOrg"
                 if (rc != 0) {
                     error 'Salesforce test scratch org display failed.'
                 }
@@ -82,7 +82,7 @@ node {
             // -------------------------------------------------------------------------
 
             stage('Push To Test Scratch Org') {
-                rc = command "${toolbelt}/sfdx force:source:push --targetusername ciorg"
+                rc = command "${toolbelt}/sfdx force:source:push --targetusername HubOrg"
                 if (rc != 0) {
                     error 'Salesforce push to test scratch org failed.'
                 }
@@ -94,7 +94,7 @@ node {
             // -------------------------------------------------------------------------
 
             stage('Run Tests In Test Scratch Org') {
-                rc = command "${toolbelt}/sfdx force:apex:test:run --targetusername ciorg --wait 10 --resultformat tap --codecoverage --testlevel ${TEST_LEVEL}"
+                rc = command "${toolbelt}/sfdx force:apex:test:run --targetusername HubOrg --wait 10 --resultformat tap --codecoverage --testlevel ${TEST_LEVEL}"
                 if (rc != 0) {
                     error 'Salesforce unit test run in test scratch org failed.'
                 }
@@ -106,7 +106,7 @@ node {
             // -------------------------------------------------------------------------
 
             stage('Delete Test Scratch Org') {
-                rc = command "${toolbelt}/sfdx force:org:delete --targetusername ciorg --noprompt"
+                rc = command "${toolbelt}/sfdx force:org:delete --targetusername HubOrg --noprompt"
                 if (rc != 0) {
                     error 'Salesforce test scratch org deletion failed.'
                 }
