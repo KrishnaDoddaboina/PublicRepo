@@ -1,6 +1,7 @@
 #!groovy
 
 import groovy.json.JsonSlurperClassic
+import groovy.json.JsonSlurper
 
 node {
 
@@ -11,6 +12,7 @@ node {
     def PACKAGE_NAME='0Ho1U000000CaUzSAK'
     def PACKAGE_VERSION
     def SF_INSTANCE_URL = env.SFDC_HOST_DH ?: "https://login.salesforce.com"
+    def SFDC_USERNAME
 
     def toolbelt = tool 'toolbelt'
 
@@ -22,14 +24,19 @@ node {
     stage('checkout source') {
         checkout scm
     }
+    println SF_CONSUMER_KEY
+    println SF_USERNAME
+    println SERVER_KEY_CREDENTALS_ID
+    println SF_INSTANCE_URL
 
 
     // -------------------------------------------------------------------------
     // Run all the enclosed stages with access to the Salesforce
     // JWT key credentials.
     // -------------------------------------------------------------------------
-    
+    println 'before withEnv'
     withEnv(["HOME=${env.WORKSPACE}"]) {
+     println 'This is current Org'
         
         withCredentials([file(credentialsId: SERVER_KEY_CREDENTALS_ID, variable: 'server_key_file')]) {
 
@@ -38,7 +45,8 @@ node {
             // -------------------------------------------------------------------------
 
             stage('Authorize DevHub') {
-                rc = command "${toolbelt}/sfdx force:auth:jwt:grant --instanceurl ${SF_INSTANCE_URL} --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile ${server_key_file} --setdefaultdevhubusername --setalias HubOrg"
+                rc = command "${toolbelt}/sfdx force:auth:jwt:grant --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile \"${server_key_file}\" --setdefaultdevhubusername --instanceurl ${SF_INSTANCE_URL}  --setalias HubOrg"
+                    println rc
                 if (rc != 0) {
                     error 'Salesforce dev hub org authorization failed.'
                 }
