@@ -56,8 +56,8 @@ node {
             // -------------------------------------------------------------------------
             // Create new scratch org to test your code.
             // -------------------------------------------------------------------------
-
-           */ stage('Create Test Scratch Org') {
+            */
+            stage('Create Test Scratch Org') {
                 rc = command "${toolbelt}/sfdx force:org:create --targetdevhubusername ${HUB_ORG_DH} --setdefaultusername --definitionfile config/project-scratch-def.json --setalias jorg --wait 10 --durationdays 7"
                 if (rc != 0) {
                     error 'Salesforce test scratch org creation failed.'
