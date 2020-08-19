@@ -67,7 +67,7 @@ node {
             // -------------------------------------------------------------------------
 
             stage('Display Test Scratch Org') {
-                rc = command "${toolbelt}/sfdx force:org:display --targetusername ciorg"
+                rc = command "${toolbelt}/sfdx force:org:display --targetusername myScratchOrg"
                 if (rc != 0) {
                     error 'Salesforce test scratch org display failed.'
                 }
@@ -79,7 +79,7 @@ node {
             // -------------------------------------------------------------------------
 
             stage('Push To Test Scratch Org') {
-                rc = command "${toolbelt}/sfdx force:source:push --targetusername ciorg"
+                rc = command "${toolbelt}/sfdx force:source:push --targetusername myScratchOrg"
                 if (rc != 0) {
                     error 'Salesforce push to test scratch org failed.'
                 }
