@@ -6,7 +6,7 @@ pipeline {
         // ...
     }
     stages {    
-        stage('TEST') {
+        stage('Authorize DevHub') {
             steps {
                 withCredentials([file(credentialsId: 'SERVER_KEY_CREDENTALS_ID', variable: 'VAR_CERT_FILE')]) {
                     sh returnStdout: true, script: "${toolbelt}/sfdx force:auth:jwt:grant --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile ${VAR_CERT_FILE} --setdefaultdevhubusername --instanceurl ${SF_INSTANCE_URL}"
