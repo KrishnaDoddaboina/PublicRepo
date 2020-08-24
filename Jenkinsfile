@@ -3,7 +3,7 @@ pipeline {
     environment {
         // Removed other variables for clarity...
         SFDX_USE_GENERIC_UNIX_KEYCHAIN = true
-        SERVER_CREDENTALS = credentials('')
+        SERVER_CREDENTALS = credentials('039c2d32-4253-4c49-8974-f652f3e0c125')
         
         // ...
     }
