@@ -1,5 +1,12 @@
 pipeline {
 	agent any
+	environment {
+         SF_CONSUMER_KEY=env.CONNECTED_APP_CONSUMER_KEY_DH
+		 SF_USERNAME=env.HUB_ORG_DH
+		 SF_USERNAME_TARGET=env.HUB_TARGET_ORG_DH
+		 SERVER_KEY_CREDENTALS_ID=env.JWT_CRED_ID_DH
+	
+    }
 	stages {
 		stage('checkout source') {
 			steps {
@@ -9,7 +16,7 @@ pipeline {
 		stage('Authorize DevHub') {
 			steps {
 				println 'code in Authorize DevHub'
-				rc = command "${toolbelt} force:auth:jwt:grant --clientid ${SF_CONSUMER_TARGET_KEY} --username ${SF_USERNAME_TARGET} --jwtkeyfile \"${server_key_file}\" --setdefaultdevhubusername --instanceurl ${SF_INSTANCE_URL}   --setalias HubOrg"
+				rc = command "${toolbelt} force:auth:jwt:grant --instanceurl ${SF_INSTANCE_URL} --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile ${server_key_file} --setdefaultdevhubusername --setalias HubOrg"
                     println rc
                     if (rc != 0) {
                         println 'code in Authorize DevHub error block'
