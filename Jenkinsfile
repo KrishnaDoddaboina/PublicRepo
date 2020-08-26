@@ -27,7 +27,14 @@ pipeline {
 				checkout scm
 			}
 		}
-		
+	    stage('Authorize DevHub'){
+	    	steps {
+				withCredentials([file(credentialsId: SERVER_KEY_CREDENTALS_ID, variable: 'server_key_file')])) {
+                    sh returnStdout: true, script: "${SFDX_HOME}/force:auth:jwt:grant --instanceurl ${SF_INSTANCE_URL} --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile ${server_key_file} --setdefaultdevhubusername --setalias HubOrg"
+                }
+                    
+			}
+	    }
 		}
         
    	    }
