@@ -27,12 +27,7 @@ pipeline {
 				checkout scm
 			}
 		}
-		stage (Authorization DevHub){
-			
-			steps {
-			println 'code in Authorize DevHub'
-                   
-                    }
+		
 		}
         
    	    }
