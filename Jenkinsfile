@@ -29,7 +29,7 @@ pipeline {
 		
 		}
 		steps {
-			sh returnStdout: true, script: "${toolbelt}/sfdx force:auth:jwt:grant --clientid ${3MVG9n_HvETGhr3C0IBETj._LtyhM_yb8HXMP2QSpyRVInHpJgdBkUXOJsfSwEASLwZxr2pqzmKpI_LWJz1jC} --username ${krishna@rsystems.com.package} --jwtkeyfile ${server_key_file} --setdefaultdevhubusername --instanceurl ${"https://login.salesforce.com"}"
+			sh echo returnStdout: true, script: "${toolbelt}/sfdx force:auth:jwt:grant --clientid ${3MVG9n_HvETGhr3C0IBETj._LtyhM_yb8HXMP2QSpyRVInHpJgdBkUXOJsfSwEASLwZxr2pqzmKpI_LWJz1jC} --username ${krishna@rsystems.com.package} --jwtkeyfile ${server_key_file} --setdefaultdevhubusername --instanceurl ${"https://login.salesforce.com"}"
 		}
         
     }
