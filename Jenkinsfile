@@ -74,7 +74,7 @@ node {
                 stage('Create Package Version') {
 					when {
 						expression {
-								PACKAGE_NAME = null || PACKAGE_NAME = 'true' 
+								(PACKAGE_NAME = null || PACKAGE_NAME = 'true') 
 							}
 						}
                     createPackage = command "${toolbelt}  force:package:create --name ${PACKAGE_NAME} --description My_Package --packagetype Unlocked --path force-app --nonamespace --targetdevhubusername HubOrg"
