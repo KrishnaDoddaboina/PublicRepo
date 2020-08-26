@@ -23,7 +23,7 @@ pipeline {
 			
 			steps {
 			println 'code in Authorize DevHub'
-                   bat, script: 'rc = command "${toolbelt} force:auth:jwt:grant --clientid ${SF_CONSUMER_TARGET_KEY} --username ${SF_USERNAME_TARGET} --jwtkeyfile \\"${server_key_file}\\" --setdefaultdevhubusername --instanceurl ${SF_INSTANCE_URL}   --setalias HubOrg"'                    println rc
+                   bat script: 'rc = command "${toolbelt} force:auth:jwt:grant --clientid ${SF_CONSUMER_TARGET_KEY} --username ${SF_USERNAME_TARGET} --jwtkeyfile \\"${server_key_file}\\" --setdefaultdevhubusername --instanceurl ${SF_INSTANCE_URL}   --setalias HubOrg"'                    println rc
                     if (rc != 0) {
                         println 'code in Authorize DevHub error block'
                         error 'Salesforce dev hub org authorization failed.'
