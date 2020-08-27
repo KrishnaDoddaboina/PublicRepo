@@ -3,7 +3,7 @@
         {
             "path": "force-app",
             "default": true,
-            "package": "PraticePackage3",
+            "package": "sfdxPrject",
             "versionName": "ver 0.1",
             "versionNumber": "0.1.0.NEXT"
         }
@@ -12,6 +12,6 @@
     "sfdcLoginUrl": "https://login.salesforce.com",
     "sourceApiVersion": "48.0",
     "packageAliases": {
-        "PraticePackage3": "0Ho2w000000KyykCAC"
+        "sfdxPrject": "0Ho2w000000KyykCAC"
     }
 }
