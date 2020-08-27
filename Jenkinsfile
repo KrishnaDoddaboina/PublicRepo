@@ -47,7 +47,7 @@ node {
             try {
                 stage('Authorize DevHub') {
                     println 'code in Authorize DevHub'
-                    //rc = command "${toolbelt} force:auth:jwt:grant --instanceurl ${SF_INSTANCE_URL} --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile \"${server_key_file}\" --setdefaultdevhubusername --setalias HubOrg"
+                    //rc = command "${toolbelt} force:auth:jwt:grant --instanceurl ${SF_INSTANCE_URL} --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile ${server_key_file} --setdefaultdevhubusername --setalias HubOrg"
                     rc = command "${toolbelt} force:auth:jwt:grant --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile \"${server_key_file}\" --setdefaultdevhubusername --instanceurl ${SF_INSTANCE_URL}   --setalias HubOrg"
                     println rc
                     if (rc != 0) {
@@ -55,7 +55,7 @@ node {
                         error 'Salesforce dev hub org authorization failed.'
                     }
                 }
-                
+                /*
                 // -------------------------------------------------------------------------
                 // Run unit tests in test scratch org.
                 // -------------------------------------------------------------------------
@@ -66,38 +66,37 @@ node {
                         error 'Salesforce unit test run in test scratch org failed.'
                     }
                 }
-                
+                */
                 // -------------------------------------------------------------------------
                 // Create package version.
                 // -------------------------------------------------------------------------
                 
                 stage('Create Package Version') {
-					when {
-						expression {
-								PACKAGE_NAME == null || PACKAGE_NAME == 'true'
-							}
-						}
+                    
+                    if (PACKAGE_NAME == "true") { 
                     createPackage = command "${toolbelt}  force:package:create --name ${PACKAGE_NAME} --description My_Package --packagetype Unlocked --path force-app --nonamespace --targetdevhubusername HubOrg"
                     println createPackage
+                    } else {                         
                     
+                                    
                     if (isUnix()) {
                         output = sh returnStdout: true, script: "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json"
                     } else {
                         output = bat(returnStdout: true, script: "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json").trim()
                         output = output.readLines().drop(1).join(" ")
                     }
+                   }
                     println output
                     // Wait 5 minutes for package replication.
-                    sleep 30
-                    
                     def jsonSlurper = new JsonSlurper()
                     def response = jsonSlurper.parseText(output)
                     PACKAGE_VERSION = response.result.SubscriberPackageVersionId
                     println PACKAGE_VERSION
                     response = null
-                   
+                    
                     println PACKAGE_VERSION
                     
+                   
                     
                 }
                 
@@ -144,7 +143,7 @@ node {
             finally {  
                 println 'Finally start'
                 //emailext body: "This is email", recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']], subject: 'Test'
-                emailext body: "This is to inform you that Job '${JOB_NAME}' (${BUILD_NUMBER}) having ${currentBuild.currentResult} status and your Subscriber Package Version Id is ${PACKAGE_VERSION}" , recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']], subject: "Job '${JOB_NAME}' (${BUILD_NUMBER}) ${currentBuild.currentResult} - confirmation"
+                //emailext body: "This is to inform you that Job '${JOB_NAME}' (${BUILD_NUMBER}) having ${currentBuild.currentResult} status and your Subscriber Package Version Id is ${PACKAGE_VERSION}" , recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']], subject: "Job '${JOB_NAME}' (${BUILD_NUMBER}) ${currentBuild.currentResult} - confirmation"
                   
             }
         }
@@ -159,4 +158,3 @@ def command(script) {
         return bat(returnStatus: true, script: script);
     }
 }
-	
