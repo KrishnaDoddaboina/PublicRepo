@@ -23,7 +23,12 @@ node {
     // -------------------------------------------------------------------------
 
     stage('checkout source') {
-        checkout scm
+        result = sh (script: "git log -1 | grep '\\[ci skip\\]'", returnStatus: true) 
+  if (result != 0) {
+    echo "performing build..."
+  } else {
+    echo "not running..."
+  }
     }
 
     println SF_CONSUMER_KEY
