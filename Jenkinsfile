@@ -24,7 +24,7 @@ node {
 
     stage('checkout source') {
        checkout scm
-        result = bat (script: "git log -1 | grep '\\[ci skip\\]'", returnStatus: true) 
+        result = bat (script: "git log -1 ", returnStatus: true) 
   if (result != 0) {
     echo "performing build..."
   } else {
