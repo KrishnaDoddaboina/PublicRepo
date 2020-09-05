@@ -23,7 +23,13 @@ node {
     // -------------------------------------------------------------------------
 
     stage('checkout source') {
-        checkout scm
+       checkout scm
+        result = bat (script: "git log -1 | grep '\\[ci skip\\]'", returnStatus: true) 
+  if (result != 0) {
+    echo "performing build..."
+  } else {
+    echo "not running..."
+  }
     }
 
     println SF_CONSUMER_KEY
@@ -75,8 +81,8 @@ node {
                     
                     if (PACKAGE_NAME == "true") { 
                     createPackage = command "${toolbelt}  force:package:create --name ${PACKAGE_NAME} --description My_Package --packagetype Unlocked --path force-app --nonamespace --targetdevhubusername HubOrg"
-                    println createPackage
-                    } else {                         
+                   println createPackage
+                   } else {                         
                     
                                     
                     if (isUnix()) {
