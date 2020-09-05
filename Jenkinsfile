@@ -82,7 +82,7 @@ node {
                     //if (PACKAGE_NAME == "true") { 
                     //createPackage = command "${toolbelt}  force:package:create --name ${PACKAGE_NAME} --description My_Package --packagetype Unlocked --path force-app --nonamespace --targetdevhubusername HubOrg"
                    // println createPackage
-                   // } else {                         
+                   } else {                         
                     
                                     
                     if (isUnix()) {
